@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redes Event Management — Events, Conferences & Meetups | Bengaluru</title>
+  <meta name="description" content="Redes Event Management — full-service event planning and conference organization in Bengaluru. Conferences, meetups, corporate events, and production." />
+  <meta name="author" content="Redes Event Management" />
+  <!-- Tailwind Play CDN for prototype (not for production build) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    // Tailwind config extension (fonts/colors similar to reference)
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#d81f48', // pink/red from reference
+            dark: '#2b2f33',
+            accent: '#f7d6dc'
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui']
+          },
+          borderRadius: {
+            'xl-2': '1.25rem'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- SEO / Social meta -->
+  <meta property="og:title" content="Redes Event Management — Events & Conferences in Bengaluru" />
+  <meta property="og:description" content="Professional event planning, conferences, and meetups. Book speakers, venues and production." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    /* Small custom styles for shapes/animations */
+    .hero-shape {
+      clip-path: ellipse(48% 56% at 75% 50%);
+    }
+    /* subtle focus ring for accessibility */
+    .focus-ring:focus {
+      outline: 3px solid rgba(216,31,72,0.25);
+      outline-offset: 2px;
+    }
+    /* service icon placeholder circle */
+    .icon-circle { width: 56px; height: 56px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body class="antialiased text-gray-800">
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="bg-white shadow-sm sticky top-0 z-40" role="banner" aria-label="Site header">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3" aria-label="Redes Event Management Home">
+          <svg width="40" height="40" viewBox="0 0 24 24" class="text-primary" aria-hidden>
+            <path fill="#d81f48" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
+          </svg>
+          <div>
+            <span class="font-bold text-lg leading-none">Redes</span>
+            <div class="text-xs -mt-0.5 text-gray-500">Event Management</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Main">
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="index.html">Home</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="about.html">About</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="service.html">Services</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="portfolio.html">Portfolio</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="blog.html">Blog</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="content.html">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="content.html" class="hidden md:inline-block px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:brightness-95 focus-ring">Get Ticket</a>
+
+        <!-- Mobile hamburger -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg focus-ring" aria-label="Open menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="#2b2f33" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile slide-out -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/40 hidden z-50" aria-hidden="true">
+      <div class="bg-white w-80 h-full shadow-xl p-6 max-w-full" role="dialog" aria-modal="true" aria-label="Mobile menu">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <svg width="36" height="36" viewBox="0 0 24 24"><path fill="#d81f48" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+            <div>
+              <div class="font-bold">Redes</div>
+              <div class="text-xs text-gray-500">Event Management</div>
+            </div>
+          </div>
+          <button id="closeMobile" class="p-2 rounded focus-ring" aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+
+        <div class="mt-6">
+          <input type="search" placeholder="Search..." class="w-full border rounded-lg px-3 py-2 focus:ring" aria-label="Mobile search" />
+          <ul class="mt-6 space-y-3">
+            <li><a href="index.html" class="block py-2 px-3 rounded hover:bg-gray-50">Home</a></li>
+            <li><a href="about.html" class="block py-2 px-3 rounded hover:bg-gray-50">About</a></li>
+            <li><a href="service.html" class="block py-2 px-3 rounded hover:bg-gray-50">Services</a></li>
+            <li><a href="portfolio.html" class="block py-2 px-3 rounded hover:bg-gray-50">Portfolio</a></li>
+            <li><a href="blog.html" class="block py-2 px-3 rounded hover:bg-gray-50">Blog</a></li>
+            <li><a href="content.html" class="block py-2 px-3 rounded hover:bg-gray-50">Contact</a></li>
+          </ul>
+
+          <div class="mt-6 flex gap-3">
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <main id="home" class="relative">
+    <section class="bg-gradient-to-r from-white via-pink-50 to-accent">
+      <div class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-8 items-center">
+        <div class="space-y-6">
+          <div class="flex items-center gap-3 text-sm text-primary font-semibold">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#d81f48" aria-hidden><path d="M7 10V3h10v7"/><path stroke="#d81f48" stroke-width="2" d="M3 21h18"/></svg>
+            <span>January 21, 2021</span>
+          </div>
+
+          <h1 class="text-4xl md:text-5xl font-extrabold text-dark leading-tight">
+            Events, Meetups & <span class="text-primary">Conferences</span>
+          </h1>
+
+          <p class="text-gray-600 text-lg max-w-xl">We design memorable conferences, corporate events and meetups across Bengaluru — production, speakers, and full event execution handled end-to-end.</p>
+
+          <div class="flex gap-4">
+            <a href="#contact" class="px-6 py-3 rounded-lg bg-primary text-white font-semibold focus-ring">Get Started</a>
+            <a href="#services" class="px-6 py-3 rounded-lg border border-primary text-primary font-medium hover:bg-primary/5 focus-ring">View Details</a>
+          </div>
+
+          <div class="mt-6 flex items-center gap-6 text-gray-700">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#2b2f33" aria-hidden><path d="M12 2L2 7l10 5 10-5L12 2z"/><path d="M2 17l10 5 10-5"/></svg>
+              <span class="font-semibold">500 Seat</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#2b2f33" aria-hidden><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>
+              <span class="font-semibold">10 Speakers</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#2b2f33" aria-hidden><path d="M12 2a6 6 0 100 12"/></svg>
+              <span>1356 Broadway, New York</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- right: image / shape -->
+        <div class="relative flex justify-center">
+          <div class="w-full md:w-4/5 hero-shape bg-cover bg-center rounded-2xl overflow-hidden shadow-lg" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=60'); min-height: 360px;" role="img" aria-label="Conference speaker on stage">
+            <!-- small circles with inset photos -->
+            <div class="absolute -top-6 -left-6">
+              <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow">
+                <img src="https://images.unsplash.com/photo-1531123414780-f2e0d64f4f6f?auto=format&fit=crop&w=400&q=60" alt="Speaker on stage" class="w-full h-full object-cover">
+              </div>
+            </div>
+            <div class="absolute top-12 right-8">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=60" alt="Panelist" class="w-full h-full object-cover">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- quick popular events block -->
+    <section class="py-10">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-extrabold text-center mb-6">Popular Event</h2>
+        <div class="flex justify-center space-x-8 mb-8 text-gray-600">
+          <button class="px-4 py-2 border rounded-md text-primary">Business</button>
+          <button class="px-4 py-2 rounded-md hover:bg-gray-50">Fire Wall</button>
+          <button class="px-4 py-2 rounded-md hover:bg-gray-50">Sport</button>
+          <button class="px-4 py-2 rounded-md hover:bg-gray-50">Web Development</button>
+          <button class="px-4 py-2 rounded-md hover:bg-gray-50">Marketing</button>
+          <button class="px-4 py-2 rounded-md hover:bg-gray-50">Technology</button>
+        </div>
+
+        <!-- sample event cards -->
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-white rounded-2xl shadow overflow-hidden" aria-label="Event card">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=60" alt="Audience" class="w-full h-44 object-cover">
+              <div class="absolute left-5 bottom-5 bg-primary text-white px-4 py-2 rounded-md font-semibold inline-flex items-center gap-2">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white"><path d="M3 13h18v8H3z"/></svg> 500 Seat
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                <div class="flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="#d81f48"><path d="M3 13h18v8H3z"/></svg> January 21, 2021</div>
+                <div class="flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="#d81f48"><path d="M12 2a10 10 0 100 20"/></svg> Broadw, New York</div>
+              </div>
+              <h3 class="font-semibold text-lg">Media Companies Need To Better</h3>
+              <p class="mt-3 text-gray-600 text-sm">Short excerpt about the event, speakers and the audience.</p>
+              <div class="mt-4 flex justify-between items-center">
+                <a href="#portfolio" class="text-primary font-medium">Read more →</a>
+                <a class="px-4 py-2 rounded-md bg-primary text-white text-sm" href="#contact">Book Now</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2 -->
+          <article class="bg-white rounded-2xl shadow overflow-hidden" aria-label="Event card">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=60" alt="Crowd" class="w-full h-44 object-cover">
+              <div class="absolute left-5 bottom-5 bg-primary text-white px-4 py-2 rounded-md font-semibold inline-flex items-center gap-2">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white"><path d="M3 13h18v8H3z"/></svg> 500 Seat
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                <div class="flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="#d81f48"><path d="M3 13h18v8H3z"/></svg> January 21, 2021</div>
+                <div class="flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="#d81f48"><path d="M12 2a10 10 0 100 20"/></svg> Broadw, New York</div>
+              </div>
+              <h3 class="font-semibold text-lg">Companies Share Strategies To...</h3>
+              <p class="mt-3 text-gray-600 text-sm">Short excerpt about the event, speakers and the audience.</p>
+              <div class="mt-4 flex justify-between items-center">
+                <a href="#portfolio" class="text-primary font-medium">Read more →</a>
+                <a class="px-4 py-2 rounded-md bg-primary text-white text-sm" href="#contact">Book Now</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="bg-white rounded-2xl shadow overflow-hidden" aria-label="Event card">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=60" alt="Expo" class="w-full h-44 object-cover">
+              <div class="absolute left-5 bottom-5 bg-primary text-white px-4 py-2 rounded-md font-semibold inline-flex items-center gap-2">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white"><path d="M3 13h18v8H3z"/></svg> 500 Seat
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                <div class="flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="#d81f48"><path d="M3 13h18v8H3z"/></svg> January 21, 2021</div>
+                <div class="flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="#d81f48"><path d="M12 2a10 10 0 100 20"/></svg> Broadw, New York</div>
+              </div>
+              <h3 class="font-semibold text-lg">Proactive Transformation Requires</h3>
+              <p class="mt-3 text-gray-600 text-sm">Short excerpt about the event, speakers and the audience.</p>
+              <div class="mt-4 flex justify-between items-center">
+                <a href="#portfolio" class="text-primary font-medium">Read more →</a>
+                <a class="px-4 py-2 rounded-md bg-primary text-white text-sm" href="#contact">Book Now</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Services / Featured Offerings ===== -->
+  <section id="services" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold">What We Offer</h2>
+        <p class="text-gray-600 mt-2">Full event lifecycle — planning, production, and promotion.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 border rounded-2xl text-center">
+          <div class="mx-auto icon-circle bg-primary/10 text-primary mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#d81f48"><path d="M12 2l4 8H8z"/></svg>
+          </div>
+          <h3 class="font-semibold">Event Production</h3>
+          <p class="text-sm text-gray-600 mt-2">AV, staging, lighting and on-site crew to deliver flawless experiences.</p>
+          <a class="mt-4 inline-block text-primary font-medium" href="#contact">Learn more →</a>
+        </div>
+
+        <div class="p-6 border rounded-2xl text-center">
+          <div class="mx-auto icon-circle bg-primary/10 text-primary mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#d81f48"><path d="M12 2l9 21H3z"/></svg>
+          </div>
+          <h3 class="font-semibold">Speaker Sourcing</h3>
+          <p class="text-sm text-gray-600 mt-2">We curate and manage speakers, moderators, and panels for any format.</p>
+          <a class="mt-4 inline-block text-primary font-medium" href="#contact">Learn more →</a>
+        </div>
+
+        <div class="p-6 border rounded-2xl text-center">
+          <div class="mx-auto icon-circle bg-primary/10 text-primary mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#d81f48"><path d="M2 12h20"/></svg>
+          </div>
+          <h3 class="font-semibold">Venue & Logistics</h3>
+          <p class="text-sm text-gray-600 mt-2">Venue sourcing, floor plans, catering, permits, and on-site coordination.</p>
+          <a class="mt-4 inline-block text-primary font-medium" href="#contact">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-3xl font-extrabold">About Redes Event Management</h2>
+        <p class="text-gray-600 mt-4">Redes is a full-service event management agency based in Bengaluru (Banguluru). We specialize in conferences, corporate gatherings and large-scale meetups. Our mission is to create purposeful, memorable events that connect people, spark ideas and drive outcomes.</p>
+
+        <ul class="mt-6 space-y-3 text-gray-700">
+          <li class="flex items-start gap-3"><strong class="text-primary">Mission:</strong> Deliver impactful events with precision and creativity.</li>
+          <li class="flex items-start gap-3"><strong class="text-primary">Vision:</strong> Be the most trusted partner for large-scale events in India.</li>
+          <li class="flex items-start gap-3"><strong class="text-primary">Core values:</strong> Integrity, Creativity, Reliability.</li>
+        </ul>
+
+        <div class="mt-6 flex gap-4">
+          <a href="#portfolio" class="px-5 py-3 rounded-lg border border-primary text-primary font-medium">Our Work</a>
+          <a href="#contact" class="px-5 py-3 rounded-lg bg-primary text-white font-medium">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white p-6 rounded-2xl shadow">
+          <h3 class="font-semibold">Founder’s message</h3>
+          <p class="text-gray-600 mt-3">“We believe every event should tell a story. Our team blends strategy with production experience to bring your vision to life.” — <strong>R. K. Fernandes</strong></p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white p-4 rounded-xl shadow text-center">
+            <img class="mx-auto w-20 h-20 rounded-full object-cover" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=400&q=60" alt="Team member 1">
+            <div class="mt-3 font-medium">Asha Menon</div>
+            <div class="text-sm text-gray-500">Head of Production</div>
+          </div>
+          <div class="bg-white p-4 rounded-xl shadow text-center">
+            <img class="mx-auto w-20 h-20 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=60" alt="Team member 2">
+            <div class="mt-3 font-medium">Pranav Kumar</div>
+            <div class="text-sm text-gray-500">Events Director</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Portfolio / Case Studies with filter ===== -->
+  <section id="portfolio" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-extrabold text-center mb-6">Portfolio & Case Studies</h2>
+
+      <div class="flex justify-center gap-3 mb-8">
+        <button class="filter-btn px-4 py-2 rounded-md bg-primary text-white" data-filter="all">All</button>
+        <button class="filter-btn px-4 py-2 rounded-md border" data-filter="conferences">Conferences</button>
+        <button class="filter-btn px-4 py-2 rounded-md border" data-filter="corporate">Corporate</button>
+        <button class="filter-btn px-4 py-2 rounded-md border" data-filter="meetups">Meetups</button>
+      </div>
+
+      <div id="portfolioGrid" class="grid md:grid-cols-3 gap-6">
+        <!-- card -->
+        <div class="portfolio-item conferences bg-white rounded-2xl shadow overflow-hidden">
+          <a href="#" class="block group">
+            <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1200&q=60" alt="Conference 1" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+            <div class="p-4">
+              <h3 class="font-semibold">Global Tech Summit 2022</h3>
+              <p class="text-sm text-gray-600 mt-2">A multi-track conference with 40+ speakers.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="portfolio-item corporate bg-white rounded-2xl shadow overflow-hidden">
+          <a href="#" class="block group">
+            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=60" alt="Corporate event" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+            <div class="p-4">
+              <h3 class="font-semibold">Annual Board Retreat</h3>
+              <p class="text-sm text-gray-600 mt-2">Executive leadership gathering and workshops.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="portfolio-item meetups bg-white rounded-2xl shadow overflow-hidden">
+          <a href="#" class="block group">
+            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=60" alt="Meetup" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+            <div class="p-4">
+              <h3 class="font-semibold">Product Design Meetup</h3>
+              <p class="text-sm text-gray-600 mt-2">Community meetup for product designers.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- repeat to fill -->
+        <div class="portfolio-item conferences bg-white rounded-2xl shadow overflow-hidden">
+          <a href="#" class="block group">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=60" alt="Conference 2" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+            <div class="p-4">
+              <h3 class="font-semibold">Healthcare Innovation Forum</h3>
+              <p class="text-sm text-gray-600 mt-2">Bringing together minds in health tech.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="portfolio-item corporate bg-white rounded-2xl shadow overflow-hidden">
+          <a href="#" class="block group">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=60" alt="Corporate 2" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+            <div class="p-4">
+              <h3 class="font-semibold">Sales Kickoff 2021</h3>
+              <p class="text-sm text-gray-600 mt-2">Strategy and team building sessions.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="portfolio-item meetups bg-white rounded-2xl shadow overflow-hidden">
+          <a href="#" class="block group">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=60" alt="Meetup 2" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+            <div class="p-4">
+              <h3 class="font-semibold">Startup Pitch Night</h3>
+              <p class="text-sm text-gray-600 mt-2">Local founders pitching to investors.</p>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Testimonials ===== -->
+  <section id="testimonials" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-extrabold mb-6">What Our Clients Say</h2>
+
+      <div id="testimonialCarousel" class="relative">
+        <div class="testi-slide grid md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl shadow">
+            <div class="flex items-center gap-4">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=60" alt="Client 1" class="w-12 h-12 rounded-full object-cover">
+              <div>
+                <div class="font-semibold">S. Ramesh</div>
+                <div class="text-sm text-gray-500">Marketing Head</div>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-600">"Redes managed our annual conference flawlessly. The production and attention to detail were outstanding."</p>
+            <div class="mt-4 flex gap-1">
+              <span class="text-primary">★★★★★</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl shadow">
+            <div class="flex items-center gap-4">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=60" alt="Client 2" class="w-12 h-12 rounded-full object-cover">
+              <div>
+                <div class="font-semibold">Neha Gupta</div>
+                <div class="text-sm text-gray-500">Product Lead</div>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-600">"Very professional team. Coordinated with us from planning through to run-of-show."</p>
+            <div class="mt-4 flex gap-1">
+              <span class="text-primary">★★★★★</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl shadow">
+            <div class="flex items-center gap-4">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=60" alt="Client 3" class="w-12 h-12 rounded-full object-cover">
+              <div>
+                <div class="font-semibold">Arjun Sharma</div>
+                <div class="text-sm text-gray-500">CEO</div>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-600">"Our partner for multiple events. Creativity and execution on point."</p>
+            <div class="mt-4 flex gap-1">
+              <span class="text-primary">★★★★★</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- carousel controls (basic) -->
+        <div class="mt-6 flex justify-center gap-3">
+          <button id="prevTesti" class="px-3 py-2 rounded-md border">Prev</button>
+          <button id="nextTesti" class="px-3 py-2 rounded-md border">Next</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Pricing ===== -->
+  <section id="pricing" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-extrabold mb-4">Packages & Pricing</h2>
+      <p class="text-gray-600 mb-8">Simple, transparent packages for different event sizes.</p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border">
+          <div class="text-sm uppercase text-gray-500">Starter</div>
+          <div class="text-3xl font-extrabold mt-2">₹50,000</div>
+          <p class="text-sm text-gray-600 mt-2">Suitable for small meetups and workshops.</p>
+          <ul class="mt-4 space-y-2 text-gray-600 text-sm">
+            <li>Basic production</li>
+            <li>Venue coordination</li>
+            <li>2 staff</li>
+          </ul>
+          <a class="mt-6 inline-block px-5 py-3 rounded-lg bg-primary text-white" href="#contact">Purchase</a>
+        </div>
+
+        <div class="p-6 rounded-2xl border transform scale-105 shadow-lg bg-primary/5">
+          <div class="text-sm uppercase text-gray-500">Popular</div>
+          <div class="text-3xl font-extrabold mt-2">₹1,50,000</div>
+          <p class="text-sm text-gray-600 mt-2">Best for medium conferences — highlighted plan.</p>
+          <ul class="mt-4 space-y-2 text-gray-600 text-sm">
+            <li>Full production</li>
+            <li>AV & lighting</li>
+            <li>Speaker management</li>
+          </ul>
+          <a class="mt-6 inline-block px-5 py-3 rounded-lg bg-primary text-white" href="#contact">Purchase</a>
+        </div>
+
+        <div class="p-6 rounded-2xl border">
+          <div class="text-sm uppercase text-gray-500">Enterprise</div>
+          <div class="text-3xl font-extrabold mt-2">Custom</div>
+          <p class="text-sm text-gray-600 mt-2">Large-scale and custom programs.</p>
+          <ul class="mt-4 space-y-2 text-gray-600 text-sm">
+            <li>Dedicated account team</li>
+            <li>End-to-end production</li>
+            <li>On-site crew</li>
+          </ul>
+          <a class="mt-6 inline-block px-5 py-3 rounded-lg bg-primary text-white" href="#contact">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Blog / News ===== -->
+  <section id="blog" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-extrabold text-center mb-6">Latest from our Blog</h2>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="bg-white rounded-2xl shadow overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=60" alt="Blog 1" class="w-full h-44 object-cover">
+          <div class="p-5">
+            <div class="text-sm text-gray-500">January 21, 2021</div>
+            <h3 class="font-semibold mt-2">How to Plan an Engaging Conference</h3>
+            <p class="text-sm text-gray-600 mt-2">Top tips for curating sessions and building attendee engagement.</p>
+            <div class="mt-4 flex justify-between items-center">
+              <a href="#" class="text-primary">Read more →</a>
+              <div class="text-sm text-gray-500">3 min read</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=60" alt="Blog 2" class="w-full h-44 object-cover">
+          <div class="p-5">
+            <div class="text-sm text-gray-500">December 10, 2020</div>
+            <h3 class="font-semibold mt-2">Choosing the Right Venue</h3>
+            <p class="text-sm text-gray-600 mt-2">Checklist to match your event objectives and guest expectations.</p>
+            <div class="mt-4 flex justify-between items-center">
+              <a href="#" class="text-primary">Read more →</a>
+              <div class="text-sm text-gray-500">4 min read</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=60" alt="Blog 3" class="w-full h-44 object-cover">
+          <div class="p-5">
+            <div class="text-sm text-gray-500">November 05, 2020</div>
+            <h3 class="font-semibold mt-2">Speaker Management Best Practices</h3>
+            <p class="text-sm text-gray-600 mt-2">How we brief and support speakers for a smooth stage experience.</p>
+            <div class="mt-4 flex justify-between items-center">
+              <a href="#" class="text-primary">Read more →</a>
+              <div class="text-sm text-gray-500">5 min read</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-extrabold text-center mb-6">FAQ</h2>
+
+      <div class="max-w-3xl mx-auto space-y-3">
+        <details class="p-4 border rounded-lg" open>
+          <summary class="font-semibold cursor-pointer">What types of events do you handle?</summary>
+          <div class="mt-2 text-gray-600">We handle corporate conferences, product launches, meetups, workshops, and exhibitions.</div>
+        </details>
+
+        <details class="p-4 border rounded-lg">
+          <summary class="font-semibold cursor-pointer">Do you provide AV and production?</summary>
+          <div class="mt-2 text-gray-600">Yes, we provide full AV, lighting, stage, and crew services.</div>
+        </details>
+
+        <details class="p-4 border rounded-lg">
+          <summary class="font-semibold cursor-pointer">Can you manage speakers and travel?</summary>
+          <div class="mt-2 text-gray-600">We handle speaker sourcing, booking, travel logistics and speaker liaison on-site.</div>
+        </details>
+      </div>
+    </div> 
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-3xl font-extrabold">Get in Touch</h2>
+        <p class="text-gray-600 mt-2">Tell us about your event and we'll get back with a tailored proposal.</p>
+
+        <div class="mt-6 bg-white p-6 rounded-2xl shadow">
+          <form id="contactForm" class="space-y-4" action="#" method="post" onsubmit="submitContact(event)">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Name</label>
+              <input required name="name" id="name" class="mt-1 block w-full border rounded-md px-3 py-2 focus-ring" placeholder="Your full name" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Email</label>
+              <input required type="email" name="email" id="email" class="mt-1 block w-full border rounded-md px-3 py-2 focus-ring" placeholder="you@company.com" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Phone</label>
+              <input required name="phone" id="phone" class="mt-1 block w-full border rounded-md px-3 py-2 focus-ring" placeholder="+91 9XXXXXXXXX" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Message</label>
+              <textarea required name="message" id="message" rows="4" class="mt-1 block w-full border rounded-md px-3 py-2 focus-ring" placeholder="Tell us about your event..."></textarea>
+            </div>
+            <div class="flex items-center gap-3">
+              <button type="submit" class="px-5 py-3 bg-primary text-white rounded-lg">Send Message</button>
+              <div id="contactResult" class="text-sm text-green-600" role="status" aria-live="polite"></div>
+            </div>
+          </form>
+
+          <div class="mt-6 text-sm text-gray-700">
+            <p><strong>Phone:</strong> <a href="tel:+919676659153" class="text-primary">+91 96766 59153</a></p>
+            <p><strong>Email:</strong> <a href="mailto:info@redescreation.in" class="text-primary">info@redescreation.in</a></p>
+            <p class="mt-2"><strong>Address:</strong> Banguluru. <span class="text-gray-500">(We operate across India.)</span></p>
+            <p class="mt-2"><strong>Domain:</strong> www.redescreation.in</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold">Find us on the map</h3>
+        <div class="mt-4 w-full h-80 border rounded-2xl overflow-hidden">
+          <!-- Google Maps embed centered on Bengaluru / Banguluru -->
+          <iframe title="Redes Event Management location map (Bengaluru)" src="https://www.google.com/maps?q=Bengaluru&output=embed" class="w-full h-full border-0" loading="lazy" aria-hidden="false"></iframe>
+        </div>
+
+        <div class="mt-6 bg-white p-4 rounded-lg shadow text-sm">
+          <div class="font-semibold">Office Hours</div>
+          <div class="text-gray-600">Mon - Fri: 9:00 AM - 6:00 PM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FOOTER
+  ================================================================== -->
+  <footer class="bg-gray-900 text-gray-300 py-16">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 px-6">
+      <div>
+        <h3 class="text-white font-bold text-xl mb-4">Redes</h3>
+        <p>Your trusted partner in event management. We bring your vision to life with creativity and professionalism.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-pink-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-pink-500">About</a></li>
+          <li><a href="services.html" class="hover:text-pink-500">Services</a></li>
+          <li><a href="portfolio.html" class="hover:text-pink-500">Portfolio</a></li>
+          <li><a href="blog.html" class="hover:text-pink-500">Blog</a></li>
+          <li><a href="contact.html" class="hover:text-pink-500">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Our Services</h4>
+        <ul class="space-y-2">
+          <li>Wedding Planning</li>
+          <li>Corporate Events</li>
+          <li>Concerts & Festivals</li>
+          <li>Birthday Parties</li>
+          <li>Exhibitions</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/facebook-new.png" alt="FB"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/instagram-new.png" alt="IG"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/twitter.png" alt="Twitter"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-10 text-gray-500">&copy; 2025 Redes Event Management. All rights reserved.</div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    // // Accessibility: set current year
+    // document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMobile = document.getElementById('closeMobile');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    });
+    closeMobile.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+
+    // Portfolio filters
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-primary', 'text-white'));
+        btn.classList.add('bg-primary', 'text-white');
+        document.querySelectorAll('#portfolioGrid .portfolio-item').forEach(item => {
+          if (filter === 'all') {
+            item.style.display = 'block';
+          } else {
+            if (item.classList.contains(filter)) item.style.display = 'block'; else item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Basic testimonial carousel (rotate slides)
+    const testiSlides = document.querySelectorAll('.testi-slide');
+    // For this prototype, there's only one grid, so prev/next will just toggle a simple transform or could be replaced with a slider lib.
+    document.getElementById('prevTesti').addEventListener('click', () => {
+      alert('For production: integrate a carousel library (Glide/Swiper) or implement slide logic.');
+    });
+    document.getElementById('nextTesti').addEventListener('click', () => {
+      alert('For production: integrate a carousel library (Glide/Swiper) or implement slide logic.');
+    });
+
+    // Contact form submit (demo)
+    function submitContact(e) {
+      e.preventDefault();
+      const result = document.getElementById('contactResult');
+      result.textContent = 'Thanks — your message has been received. We will contact you shortly.';
+      // In production, integrate AJAX call to backend or service
+      e.target.reset();
+      setTimeout(() => { result.textContent = ''; }, 6000);
+    }
+
+    // Simple keyboard accessibility: close mobile menu on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

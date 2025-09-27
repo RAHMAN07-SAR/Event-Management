@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Redes Event Management</title>
+  <meta name="description" content="Discover premium event management services by Redes Event Management in Bengaluru. We handle corporate events, weddings, conferences, and more with creativity and precision." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Custom Animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .float { animation: float 3s ease-in-out infinite; }
+    .transition-transform { transition: transform 0.4s ease; }
+    .hover-scale:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+  
+  <!-- ===== Header / Nav ===== -->
+  <header class="bg-white shadow-sm sticky top-0 z-40" role="banner" aria-label="Site header">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3" aria-label="Redes Event Management Home">
+          <svg width="40" height="40" viewBox="0 0 24 24" class="text-primary" aria-hidden>
+            <path fill="#d81f48" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
+          </svg>
+          <div>
+            <span class="font-bold text-lg leading-none">Redes</span>
+            <div class="text-xs -mt-0.5 text-gray-500">Event Management</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Main">
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="index.html">Home</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="about.html">About</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="service.html">Services</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="portfolio.html">Portfolio</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="blog.html">Blog</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="content.html">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="content.html" class="hidden md:inline-block px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:brightness-95 focus-ring">Get Ticket</a>
+
+        <!-- Mobile hamburger -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg focus-ring" aria-label="Open menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="#2b2f33" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile slide-out -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/40 hidden z-50" aria-hidden="true">
+      <div class="bg-white w-80 h-full shadow-xl p-6 max-w-full" role="dialog" aria-modal="true" aria-label="Mobile menu">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <svg width="36" height="36" viewBox="0 0 24 24"><path fill="#d81f48" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+            <div>
+              <div class="font-bold">Redes</div>
+              <div class="text-xs text-gray-500">Event Management</div>
+            </div>
+          </div>
+          <button id="closeMobile" class="p-2 rounded focus-ring" aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+
+        <div class="mt-6">
+          <input type="search" placeholder="Search..." class="w-full border rounded-lg px-3 py-2 focus:ring" aria-label="Mobile search" />
+          <ul class="mt-6 space-y-3">
+            <li><a href="index.html" class="block py-2 px-3 rounded hover:bg-gray-50">Home</a></li>
+            <li><a href="about.html" class="block py-2 px-3 rounded hover:bg-gray-50">About</a></li>
+            <li><a href="service.html" class="block py-2 px-3 rounded hover:bg-gray-50">Services</a></li>
+            <li><a href="portfolio.html" class="block py-2 px-3 rounded hover:bg-gray-50">Portfolio</a></li>
+            <li><a href="blog.html" class="block py-2 px-3 rounded hover:bg-gray-50">Blog</a></li>
+            <li><a href="content.html" class="block py-2 px-3 rounded hover:bg-gray-50">Contact</a></li>
+          </ul>
+
+          <div class="mt-6 flex gap-3">
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Spacer -->
+  <div class="h-16"></div>
+
+  <!-- ==================================================
+       HERO SECTION
+  ================================================== -->
+  <section class="relative bg-cover bg-center h-[70vh] flex items-center justify-center text-white"
+    style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div class="relative z-10 text-center max-w-3xl px-4" data-aos="fade-up">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">Our Services</h1>
+      <p class="text-lg md:text-xl mb-6">Creating unforgettable events with passion, precision, and creativity.</p>
+      <a href="#services" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg transition">Explore Services</a>
+    </div>
+  </section>
+
+  <!-- ==================================================
+       SERVICES GRID
+  ================================================== -->
+  <section id="services" class="py-20 max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">What We Offer</h2>
+      <p class="text-gray-600">From grand conferences to intimate weddings, our expertise covers every detail.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <!-- Service Card -->
+      <div class="bg-white p-6 rounded-xl shadow hover-scale transition-transform" data-aos="fade-up">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Corporate Events" class="rounded-lg mb-4 float" />
+        <h3 class="text-xl font-semibold mb-2">Corporate Events</h3>
+        <p class="text-gray-600 mb-4">Professional planning for conferences, product launches, and meetings with flawless execution.</p>
+        <a href="#" class="text-pink-600 font-medium hover:underline">Learn More →</a>
+      </div>
+      <!-- Wedding -->
+      <div class="bg-white p-6 rounded-xl shadow hover-scale" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wedding Planning" class="rounded-lg mb-4 float" />
+        <h3 class="text-xl font-semibold mb-2">Weddings</h3>
+        <p class="text-gray-600 mb-4">Memorable weddings tailored to your dreams, from décor to coordination.</p>
+        <a href="#" class="text-pink-600 font-medium hover:underline">Learn More →</a>
+      </div>
+      <!-- Exhibitions -->
+      <div class="bg-white p-6 rounded-xl shadow hover-scale" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Exhibitions" class="rounded-lg mb-4 float" />
+        <h3 class="text-xl font-semibold mb-2">Exhibitions</h3>
+        <p class="text-gray-600 mb-4">Creative exhibition design and seamless execution that attract and engage visitors.</p>
+        <a href="#" class="text-pink-600 font-medium hover:underline">Learn More →</a>
+      </div>
+      <!-- Social Events -->
+      <div class="bg-white p-6 rounded-xl shadow hover-scale" data-aos="fade-up" data-aos-delay="300">
+        <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Social Events" class="rounded-lg mb-4 float" />
+        <h3 class="text-xl font-semibold mb-2">Social Gatherings</h3>
+        <p class="text-gray-600 mb-4">Engaging celebrations and personal events that create lasting memories.</p>
+        <a href="#" class="text-pink-600 font-medium hover:underline">Learn More →</a>
+      </div>
+      <!-- Virtual Events -->
+      <div class="bg-white p-6 rounded-xl shadow hover-scale" data-aos="fade-up" data-aos-delay="400">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Virtual Events" class="rounded-lg mb-4 float" />
+        <h3 class="text-xl font-semibold mb-2">Virtual Events</h3>
+        <p class="text-gray-600 mb-4">Modern tech-driven online events with seamless connectivity and interactivity.</p>
+        <a href="#" class="text-pink-600 font-medium hover:underline">Learn More →</a>
+      </div>
+      <!-- Event Production -->
+      <div class="bg-white p-6 rounded-xl shadow hover-scale" data-aos="fade-up" data-aos-delay="500">
+        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event Production" class="rounded-lg mb-4 float" />
+        <h3 class="text-xl font-semibold mb-2">Event Production</h3>
+        <p class="text-gray-600 mb-4">Complete production services including sound, lighting, and stage management.</p>
+        <a href="#" class="text-pink-600 font-medium hover:underline">Learn More →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================
+       HOW WE WORK (PROCESS)
+  ================================================== -->
+  <section class="py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">How We Work</h2>
+        <p class="text-gray-600">A simple, structured process to deliver outstanding results.</p>
+      </div>
+      <div class="grid md:grid-cols-4 gap-10">
+        <div class="bg-white p-6 rounded-xl shadow" data-aos="zoom-in">
+          <div class="text-pink-600 text-3xl font-bold mb-2">01</div>
+          <h3 class="font-semibold mb-2">Consultation</h3>
+          <p class="text-gray-600">Understanding your vision and requirements.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow" data-aos="zoom-in" data-aos-delay="100">
+          <div class="text-pink-600 text-3xl font-bold mb-2">02</div>
+          <h3 class="font-semibold mb-2">Planning</h3>
+          <p class="text-gray-600">Crafting a detailed roadmap tailored to your event.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow" data-aos="zoom-in" data-aos-delay="200">
+          <div class="text-pink-600 text-3xl font-bold mb-2">03</div>
+          <h3 class="font-semibold mb-2">Execution</h3>
+          <p class="text-gray-600">Seamless coordination of all elements on event day.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow" data-aos="zoom-in" data-aos-delay="300">
+          <div class="text-pink-600 text-3xl font-bold mb-2">04</div>
+          <h3 class="font-semibold mb-2">Evaluation</h3>
+          <p class="text-gray-600">Post-event analysis to ensure satisfaction and improvement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================
+       PRICING SECTION
+  ================================================== -->
+  <section class="py-20 max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Packages</h2>
+      <p class="text-gray-600">Flexible pricing tailored to your needs.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-xl shadow-lg p-8 text-center hover-scale transition" data-aos="fade-up">
+        <h3 class="text-xl font-semibold mb-4">Basic</h3>
+        <div class="text-4xl font-bold mb-4">₹25,000</div>
+        <ul class="text-gray-600 mb-6 space-y-2">
+          <li>Event Planning</li>
+          <li>Decor Setup</li>
+          <li>Basic Lighting & Sound</li>
+        </ul>
+        <a href="#" class="bg-pink-600 text-white px-6 py-3 rounded-lg">Choose Plan</a>
+      </div>
+      <div class="bg-pink-600 text-white rounded-xl shadow-lg p-8 text-center transform scale-105" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="text-xl font-semibold mb-4">Standard</h3>
+        <div class="text-4xl font-bold mb-4">₹50,000</div>
+        <ul class="mb-6 space-y-2">
+          <li>Event Planning</li>
+          <li>Decor Setup</li>
+          <li>Lighting & Sound</li>
+          <li>On-Site Management</li>
+        </ul>
+        <a href="#" class="bg-white text-pink-600 px-6 py-3 rounded-lg">Choose Plan</a>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-8 text-center hover-scale transition" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="text-xl font-semibold mb-4">Premium</h3>
+        <div class="text-4xl font-bold mb-4">₹1,00,000+</div>
+        <ul class="text-gray-600 mb-6 space-y-2">
+          <li>Full Service Package</li>
+          <li>Luxury Decor & Tech</li>
+          <li>Dedicated Team</li>
+          <li>Post-Event Report</li>
+        </ul>
+        <a href="#" class="bg-pink-600 text-white px-6 py-3 rounded-lg">Choose Plan</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================
+       TESTIMONIALS
+  ================================================== -->
+  <section class="py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4 text-center" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">What Clients Say</h2>
+      <p class="text-gray-600 mb-12">Real feedback from our happy clients.</p>
+      <div class="overflow-hidden relative">
+        <div id="testimonial-track" class="flex transition-transform duration-500">
+          <div class="min-w-full px-6">
+            <blockquote class="bg-white p-8 rounded-xl shadow">
+              <p class="text-lg mb-4">“Redes made our corporate event seamless and impressive. The team’s professionalism was unmatched.”</p>
+              <div class="font-semibold">Ananya Sharma</div>
+              <div class="text-gray-500 text-sm">CEO, TechWorld</div>
+            </blockquote>
+          </div>
+          <div class="min-w-full px-6">
+            <blockquote class="bg-white p-8 rounded-xl shadow">
+              <p class="text-lg mb-4">“Our wedding was magical thanks to Redes. From décor to execution, everything was flawless.”</p>
+              <div class="font-semibold">Rahul & Priya</div>
+              <div class="text-gray-500 text-sm">Wedding Clients</div>
+            </blockquote>
+          </div>
+          <div class="min-w-full px-6">
+            <blockquote class="bg-white p-8 rounded-xl shadow">
+              <p class="text-lg mb-4">“The exhibition booth they designed attracted so many visitors. Truly creative team.”</p>
+              <div class="font-semibold">Kiran Patel</div>
+              <div class="text-gray-500 text-sm">Marketing Head, BrightEx</div>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================
+       FAQ
+  ================================================== -->
+  <section class="py-20 max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+      <p class="text-gray-600">Find quick answers to common queries about our services.</p>
+    </div>
+    <div class="space-y-6">
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">What services do you offer?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">We offer full event management services including corporate events, weddings, exhibitions, social gatherings, and virtual events.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">How early should I book?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">We recommend booking at least 3 months in advance to secure your preferred dates and resources.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">Do you handle small events?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Yes, we handle events of all sizes with the same dedication and quality.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">Can services be customized?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Absolutely! We customize every package to match your vision, budget, and requirements.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================
+       CTA SECTION
+  ================================================== -->
+  <section class="py-20 bg-pink-600 text-white text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Let’s Make Your Event Memorable</h2>
+    <p class="mb-6">Contact us today to discuss your event and bring your vision to life.</p>
+    <a href="contact.html" class="bg-white text-pink-600 px-6 py-3 rounded-lg font-medium">Get in Touch</a>
+  </section>
+
+  <!-- ================================================================
+       FOOTER
+  ================================================================== -->
+  <footer class="bg-gray-900 text-gray-300 py-16">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 px-6">
+      <div>
+        <h3 class="text-white font-bold text-xl mb-4">Redes</h3>
+        <p>Your trusted partner in event management. We bring your vision to life with creativity and professionalism.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-pink-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-pink-500">About</a></li>
+          <li><a href="services.html" class="hover:text-pink-500">Services</a></li>
+          <li><a href="portfolio.html" class="hover:text-pink-500">Portfolio</a></li>
+          <li><a href="blog.html" class="hover:text-pink-500">Blog</a></li>
+          <li><a href="contact.html" class="hover:text-pink-500">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Our Services</h4>
+        <ul class="space-y-2">
+          <li>Wedding Planning</li>
+          <li>Corporate Events</li>
+          <li>Concerts & Festivals</li>
+          <li>Birthday Parties</li>
+          <li>Exhibitions</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/facebook-new.png" alt="FB"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/instagram-new.png" alt="IG"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/twitter.png" alt="Twitter"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-10 text-gray-500">&copy; 2025 Redes Event Management. All rights reserved.</div>
+  </footer>
+
+  <!-- ==================================================
+       SCRIPTS
+  ================================================== -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMobile = document.getElementById('closeMobile');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    });
+    closeMobile.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+
+    // Testimonials Carousel
+    const track = document.getElementById('testimonial-track');
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % 3;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }, 5000);
+
+    // FAQ Toggle
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const content = toggle.nextElementSibling;
+        content.classList.toggle('hidden');
+      });
+    });
+  </script>
+</body>
+</html>

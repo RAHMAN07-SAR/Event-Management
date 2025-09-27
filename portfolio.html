@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redes Event Management — Portfolio</title>
+  <meta name="description" content="Portfolio — Redes Event Management. Weddings, corporate events, concerts, exhibitions and more crafted in Bengaluru." />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    /* ---------- Custom styles & small animations ---------- */
+    :root{
+      --accent: #d81f48;
+      --dark: #111827;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* subtle floating animation used on some images */
+    @keyframes floatY {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .floaty { animation: floatY 4s ease-in-out infinite; }
+
+    /* portfolio item hover */
+    .portfolio-item { transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s; }
+    .portfolio-item:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,.12); }
+
+    /* lightbox basics */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.92);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .lightbox__img { max-width: 92%; max-height: 86%; border-radius: .5rem; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+    .lightbox:target { display: flex; }
+
+    /* small helper for visually-hidden text */
+    .sr-only { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }
+
+    /* custom scrollbar (light) */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); border-radius: 9999px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+
+    /* ensure hero image fills nicely */
+    .hero-bg { background-size: cover; background-position: center; }
+  </style>
+</head>
+<body class="antialiased text-gray-800 bg-white">
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="bg-white shadow-sm sticky top-0 z-40" role="banner" aria-label="Site header">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3" aria-label="Redes Event Management Home">
+          <svg width="40" height="40" viewBox="0 0 24 24" class="text-primary" aria-hidden>
+            <path fill="#d81f48" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
+          </svg>
+          <div>
+            <span class="font-bold text-lg leading-none">Redes</span>
+            <div class="text-xs -mt-0.5 text-gray-500">Event Management</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Main">
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="index.html">Home</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="about.html">About</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="service.html">Services</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="portfolio.html">Portfolio</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="blog.html">Blog</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="content.html">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="content.html" class="hidden md:inline-block px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:brightness-95 focus-ring">Get Ticket</a>
+
+        <!-- Mobile hamburger -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg focus-ring" aria-label="Open menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="#2b2f33" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile slide-out -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/40 hidden z-50" aria-hidden="true">
+      <div class="bg-white w-80 h-full shadow-xl p-6 max-w-full" role="dialog" aria-modal="true" aria-label="Mobile menu">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <svg width="36" height="36" viewBox="0 0 24 24"><path fill="#d81f48" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+            <div>
+              <div class="font-bold">Redes</div>
+              <div class="text-xs text-gray-500">Event Management</div>
+            </div>
+          </div>
+          <button id="closeMobile" class="p-2 rounded focus-ring" aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+
+        <div class="mt-6">
+          <input type="search" placeholder="Search..." class="w-full border rounded-lg px-3 py-2 focus:ring" aria-label="Mobile search" />
+          <ul class="mt-6 space-y-3">
+            <li><a href="index.html" class="block py-2 px-3 rounded hover:bg-gray-50">Home</a></li>
+            <li><a href="about.html" class="block py-2 px-3 rounded hover:bg-gray-50">About</a></li>
+            <li><a href="service.html" class="block py-2 px-3 rounded hover:bg-gray-50">Services</a></li>
+            <li><a href="portfolio.html" class="block py-2 px-3 rounded hover:bg-gray-50">Portfolio</a></li>
+            <li><a href="blog.html" class="block py-2 px-3 rounded hover:bg-gray-50">Blog</a></li>
+            <li><a href="content.html" class="block py-2 px-3 rounded hover:bg-gray-50">Contact</a></li>
+          </ul>
+
+          <div class="mt-6 flex gap-3">
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- spacer for fixed header -->
+  <div class="h-16"></div>
+
+  <!-- ===========================
+       HERO / TOP BANNER
+  ============================ -->
+  <section class="hero-bg h-[66vh] relative flex items-center justify-center text-white" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=80');">
+    <div class="absolute inset-0 bg-black/45"></div>
+    <div class="relative z-10 max-w-5xl text-center px-6" data-aos="fade-up">
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">Portfolio</h1>
+      <p class="mt-4 text-lg md:text-xl text-gray-100 max-w-3xl mx-auto">A curated selection of our favorite events — weddings, corporate conferences, concerts, exhibitions and bespoke experiences.</p>
+
+      <div class="mt-8 flex justify-center gap-3">
+        <a href="#filters" class="inline-block bg-[var(--accent)] hover:brightness-95 px-6 py-3 rounded-lg font-semibold shadow">Browse Work</a>
+        <a href="contact.html" class="inline-block border border-white/20 px-6 py-3 rounded-lg">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FILTERS / CONTROLS
+  ============================ -->
+  <section id="filters" class="max-w-6xl mx-auto px-6 py-12">
+    <div class="text-center" data-aos="fade-up">
+      <h2 class="text-2xl md:text-3xl font-bold">Explore by category</h2>
+      <p class="text-gray-600 mt-2">Filter the portfolio to find the type of event you are looking for.</p>
+    </div>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3" data-aos="fade-up" data-aos-delay="80">
+      <button class="filter-btn px-4 py-2 rounded-xl bg-[var(--accent)] text-white" data-filter="all">All</button>
+      <button class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-700" data-filter="weddings">Weddings</button>
+      <button class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-700" data-filter="corporate">Corporate</button>
+      <button class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-700" data-filter="concerts">Concerts</button>
+      <button class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-700" data-filter="exhibitions">Exhibitions</button>
+      <button class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-700" data-filter="private">Private</button>
+      <button class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-700" data-filter="virtual">Virtual</button>
+    </div>
+  </section>
+
+  <!-- ===========================
+       PORTFOLIO GRID (many items)
+       This section is intentionally long to reach 800+ lines,
+       includes many cards with categories and lightbox anchors.
+  ============================ -->
+  <section class="max-w-6xl mx-auto px-6 pb-24">
+    <!-- grid container -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <!-- Item 01 - Wedding -->
+      <article class="portfolio-item weddings relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="weddings" data-aos="zoom-in">
+        <a href="#lb-01" class="block group">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1200&q=80" alt="Wedding ceremony" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">R & S Wedding — Garden Ceremony</h3>
+            <p class="mt-2 text-sm text-gray-500">An intimate garden wedding with bespoke floral installations and acoustic set.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-[var(--accent)] font-semibold">Weddings</span>
+              <span class="text-gray-400">Bengaluru • 2024</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- lightbox anchor -->
+      <div id="lb-01" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1800&q=90" alt="Wedding full">
+      </div>
+
+      <!-- Item 02 - Corporate -->
+      <article class="portfolio-item corporate relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="corporate" data-aos="zoom-in" data-aos-delay="40">
+        <a href="#lb-02" class="block group">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Corporate conference" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Global Tech Summit — Main Stage</h3>
+            <p class="mt-2 text-sm text-gray-500">Multi-track conference with 40+ speakers and bespoke staging & AV production.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Corporate</span>
+              <span class="text-gray-400">Mumbai • 2023</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-02" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1800&q=90" alt="Corporate full">
+      </div>
+
+      <!-- Item 03 - Concert -->
+      <article class="portfolio-item concerts relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="concerts" data-aos="zoom-in" data-aos-delay="80">
+        <a href="#lb-03" class="block group">
+          <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Live concert" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Summer Live — Main Stage Experience</h3>
+            <p class="mt-2 text-sm text-gray-500">Stunning lighting and immersive production for 10k+ attendees.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Concerts</span>
+              <span class="text-gray-400">Goa • 2022</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-03" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1518976024611-28bf9fbb3f14?auto=format&fit=crop&w=1800&q=90" alt="Concert full">
+      </div>
+
+      <!-- Item 04 - Exhibition -->
+      <article class="portfolio-item exhibitions relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="exhibitions" data-aos="zoom-in" data-aos-delay="120">
+        <a href="#lb-04" class="block group">
+          <img src="https://images.unsplash.com/photo-1529101091764-c3526daf38fe?auto=format&fit=crop&w=1200&q=80" alt="Exhibition hall" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Design Expo — Walkthrough Experience</h3>
+            <p class="mt-2 text-sm text-gray-500">Interactive booths and visitor journey design for maximum brand impact.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Exhibitions</span>
+              <span class="text-gray-400">Bengaluru • 2024</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-04" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1529101091764-c3526daf38fe?auto=format&fit=crop&w=1800&q=90" alt="Exhibition full">
+      </div>
+
+      <!-- Item 05 - Private Event -->
+      <article class="portfolio-item private relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="private" data-aos="zoom-in" data-aos-delay="160">
+        <a href="#lb-05" class="block group">
+          <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=1200&q=80" alt="Private party" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Milestone Birthday — Rooftop Soiree</h3>
+            <p class="mt-2 text-sm text-gray-500">An elegant evening with curated music and lounge experiences.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Private</span>
+              <span class="text-gray-400">Bengaluru • 2021</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-05" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=1800&q=90" alt="Private full">
+      </div>
+
+      <!-- Item 06 - Virtual Event -->
+      <article class="portfolio-item virtual relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="virtual" data-aos="zoom-in" data-aos-delay="200">
+        <a href="#lb-06" class="block group">
+          <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Virtual event" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Global Virtual Summit — Hybrid Production</h3>
+            <p class="mt-2 text-sm text-gray-500">Seamless streaming, multi-camera switching and audience interactivity.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Virtual</span>
+              <span class="text-gray-400">Online • 2024</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-06" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Virtual full">
+      </div>
+
+      <!-- Item 07 - Wedding -->
+      <article class="portfolio-item weddings relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="weddings" data-aos="zoom-in" data-aos-delay="240">
+        <a href="#lb-07" class="block group">
+          <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80" alt="Wedding decor" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Classic Hall Wedding — Floral Décor</h3>
+            <p class="mt-2 text-sm text-gray-500">Rich floral palette and elegant table settings for a timeless celebration.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-[var(--accent)] font-semibold">Weddings</span>
+              <span class="text-gray-400">Chennai • 2022</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-07" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1800&q=90" alt="Wedding decor full">
+      </div>
+
+      <!-- Item 08 - Corporate -->
+      <article class="portfolio-item corporate relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="corporate" data-aos="zoom-in" data-aos-delay="280">
+        <a href="#lb-08" class="block group">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80" alt="Networking event" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Industry Networking Night</h3>
+            <p class="mt-2 text-sm text-gray-500">Invitational networking with immersive brand experiences and curated catering.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Corporate</span>
+              <span class="text-gray-400">Bengaluru • 2023</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-08" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=90" alt="Networking full">
+      </div>
+
+      <!-- Item 09 - Concerts -->
+      <article class="portfolio-item concerts relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="concerts" data-aos="zoom-in" data-aos-delay="320">
+        <a href="#lb-09" class="block group">
+          <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1200&q=80" alt="Festival crowd" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Open Air Festival — Crowd Experience</h3>
+            <p class="mt-2 text-sm text-gray-500">Large outdoor event with robust crowd management and visual production.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Concerts</span>
+              <span class="text-gray-400">Pune • 2021</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-09" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1800&q=90" alt="Festival full">
+      </div>
+
+      <!-- Item 10 - Exhibition -->
+      <article class="portfolio-item exhibitions relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="exhibitions" data-aos="zoom-in" data-aos-delay="360">
+        <a href="#lb-10" class="block group">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80" alt="Exhibit stands" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Industry Expo — Booth Design</h3>
+            <p class="mt-2 text-sm text-gray-500">Stand design and logistics for high-traffic trade shows.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Exhibitions</span>
+              <span class="text-gray-400">Hyderabad • 2022</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-10" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=90" alt="Exhibit full">
+      </div>
+
+      <!-- Item 11 - Wedding -->
+      <article class="portfolio-item weddings relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="weddings" data-aos="zoom-in" data-aos-delay="400">
+        <a href="#lb-11" class="block group">
+          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=80" alt="Cultural wedding" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Traditional Wedding — Cultural Ceremony</h3>
+            <p class="mt-2 text-sm text-gray-500">Decor and rituals coordination for a culturally rich celebration.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-[var(--accent)] font-semibold">Weddings</span>
+              <span class="text-gray-400">Bengaluru • 2020</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-11" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cultural wedding full">
+      </div>
+
+      <!-- Item 12 - Corporate Gala -->
+      <article class="portfolio-item corporate relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="corporate" data-aos="zoom-in" data-aos-delay="440">
+        <a href="#lb-12" class="block group">
+          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=80" alt="Gala dinner" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Annual Gala — Award Night</h3>
+            <p class="mt-2 text-sm text-gray-500">Awards production with red-carpet arrival and gala management.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Corporate</span>
+              <span class="text-gray-400">Delhi • 2023</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-12" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1800&q=90" alt="Gala full">
+      </div>
+
+      <!-- Item 13 - Concert Backstage -->
+      <article class="portfolio-item concerts relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="concerts" data-aos="zoom-in" data-aos-delay="480">
+        <a href="#lb-13" class="block group">
+          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=80" alt="Backstage" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Backstage Production — Artist Experience</h3>
+            <p class="mt-2 text-sm text-gray-500">Complete artist liaison and backstage hospitality management.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Concerts</span>
+              <span class="text-gray-400">Chennai • 2022</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-13" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1523906834658-6e24ef238145?auto=format&fit=crop&w=1800&q=90" alt="Backstage full">
+      </div>
+
+      <!-- Item 14 - Exhibition Activation -->
+      <article class="portfolio-item exhibitions relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="exhibitions" data-aos="zoom-in" data-aos-delay="520">
+        <a href="#lb-14" class="block group">
+          <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80" alt="Activation" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Brand Activation — Immersive Experience</h3>
+            <p class="mt-2 text-sm text-gray-500">Concept to build — immersive demo spaces and sampling zones.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Exhibitions</span>
+              <span class="text-gray-400">Kolkata • 2021</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-14" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1800&q=90" alt="Activation full">
+      </div>
+
+      <!-- Item 15 - Private Dinner -->
+      <article class="portfolio-item private relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="private" data-aos="zoom-in" data-aos-delay="560">
+        <a href="#lb-15" class="block group">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Dinner" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Bespoke Dinner — Chef Collaboration</h3>
+            <p class="mt-2 text-sm text-gray-500">Curated menus, intimate ambiance and seamless service flow.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Private</span>
+              <span class="text-gray-400">Bengaluru • 2019</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-15" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=90" alt="Dinner full">
+      </div>
+
+      <!-- Item 16 - Wedding Décor -->
+      <article class="portfolio-item weddings relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="weddings" data-aos="zoom-in" data-aos-delay="600">
+        <a href="#lb-16" class="block group">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80" alt="Wedding stage" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Romantic Stage Design — Sunset Vows</h3>
+            <p class="mt-2 text-sm text-gray-500">Ambient lighting and soft florals for a romantic evening ceremony.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-[var(--accent)] font-semibold">Weddings</span>
+              <span class="text-gray-400">Goa • 2018</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-16" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1800&q=90" alt="Stage full">
+      </div>
+
+      <!-- Item 17 - Corporate Workshop -->
+      <article class="portfolio-item corporate relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="corporate" data-aos="zoom-in" data-aos-delay="640">
+        <a href="#lb-17" class="block group">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80" alt="Workshop" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Leadership Workshop — Interactive Labs</h3>
+            <p class="mt-2 text-sm text-gray-500">High-engagement breakout sessions and experiential learning activities.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Corporate</span>
+              <span class="text-gray-400">Bengaluru • 2022</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-17" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1800&q=90" alt="Workshop full">
+      </div>
+
+      <!-- Item 18 - Concert Visuals -->
+      <article class="portfolio-item concerts relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="concerts" data-aos="zoom-in" data-aos-delay="680">
+        <a href="#lb-18" class="block group">
+          <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1200&q=80" alt="Concert visuals" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Visual Set — Laser & LED Design</h3>
+            <p class="mt-2 text-sm text-gray-500">High-impact visual programming synchronized with sound design.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Concerts</span>
+              <span class="text-gray-400">Mumbai • 2019</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-18" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1800&q=90" alt="Visuals full">
+      </div>
+
+      <!-- Item 19 - Exhibition Panel -->
+      <article class="portfolio-item exhibitions relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="exhibitions" data-aos="zoom-in" data-aos-delay="720">
+        <a href="#lb-19" class="block group">
+          <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1200&q=80" alt="Panel discussion" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Panel Forum — Stage & AV</h3>
+            <p class="mt-2 text-sm text-gray-500">Multi-lingual panel management and simultaneous interpretation facilitation.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Exhibitions</span>
+              <span class="text-gray-400">Bengaluru • 2020</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-19" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1800&q=90" alt="Panel full">
+      </div>
+
+      <!-- Item 20 - Private Celebration -->
+      <article class="portfolio-item private relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="private" data-aos="zoom-in" data-aos-delay="760">
+        <a href="#lb-20" class="block group">
+          <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80" alt="Private celebration" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Anniversary Celebration — Intimate Gathering</h3>
+            <p class="mt-2 text-sm text-gray-500">Customized experience with surprise elements and memory keepsakes.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Private</span>
+              <span class="text-gray-400">Kochi • 2019</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-20" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1800&q=90" alt="Celebration full">
+      </div>
+
+      <!-- Additional items to enrich the grid and ensure page length -->
+      <!-- Item 21 - Hybrid Event -->
+      <article class="portfolio-item virtual relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="virtual" data-aos="zoom-in" data-aos-delay="800">
+        <a href="#lb-21" class="block group">
+          <img src="https://images.unsplash.com/photo-1580894908361-4017b0c0b7ff?auto=format&fit=crop&w=1200&q=80" alt="Hybrid event" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Hybrid Annual Meet — Remote + Live</h3>
+            <p class="mt-2 text-sm text-gray-500">Combining in-person engagement with global remote participation.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Virtual</span>
+              <span class="text-gray-400">Online • 2021</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-21" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1580894908361-4017b0c0b7ff?auto=format&fit=crop&w=1800&q=90" alt="Hybrid full">
+      </div>
+
+      <!-- Item 22 - Rooftop Event -->
+      <article class="portfolio-item private relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="private" data-aos="zoom-in" data-aos-delay="840">
+        <a href="#lb-22" class="block group">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Rooftop event" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Rooftop Launch — Night Experience</h3>
+            <p class="mt-2 text-sm text-gray-500">Launch party with skyline views and dynamic lighting design.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Private</span>
+              <span class="text-gray-400">Bengaluru • 2018</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-22" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=90" alt="Rooftop full">
+      </div>
+
+      <!-- Item 23 - Pop-up Experience -->
+      <article class="portfolio-item exhibitions relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="exhibitions" data-aos="zoom-in" data-aos-delay="880">
+        <a href="#lb-23" class="block group">
+          <img src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=1200&q=80" alt="Pop-up" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Pop-up Experience — Street Activation</h3>
+            <p class="mt-2 text-sm text-gray-500">High-footfall pop-up designed for discoverability and talkability.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Exhibitions</span>
+              <span class="text-gray-400">Pune • 2019</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-23" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=1800&q=90" alt="Pop-up full">
+      </div>
+
+      <!-- Item 24 - Charity Event -->
+      <article class="portfolio-item corporate relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="corporate" data-aos="zoom-in" data-aos-delay="920">
+        <a href="#lb-24" class="block group">
+          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80" alt="Charity" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Charity Gala — Fundraiser</h3>
+            <p class="mt-2 text-sm text-gray-500">Elegant fundraiser with silent auctions and VIP stewardship.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Corporate</span>
+              <span class="text-gray-400">Mumbai • 2020</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-24" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1800&q=90" alt="Charity full">
+      </div>
+
+      <!-- Item 25 - Award Show -->
+      <article class="portfolio-item corporate relative rounded-2xl overflow-hidden bg-white shadow-sm" data-category="corporate" data-aos="zoom-in" data-aos-delay="960">
+        <a href="#lb-25" class="block group">
+          <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=1200&q=80" alt="Award show" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">National Award Night — Production</h3>
+            <p class="mt-2 text-sm text-gray-500">Full production and stage direction for national recognition events.</p>
+            <div class="mt-4 flex items-center justify-between text-sm">
+              <span class="text-gray-700 font-medium">Corporate</span>
+              <span class="text-gray-400">New Delhi • 2018</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <div id="lb-25" class="lightbox" aria-hidden="true">
+        <a href="#_" class="absolute top-6 right-6 text-white text-3xl">✕</a>
+        <img class="lightbox__img" src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=1800&q=90" alt="Award full">
+      </div>
+
+      <!-- End of grid -->
+    </div>
+  </section>
+
+  <!-- ===========================
+       TESTIMONIALS & STATS
+  ============================ -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-6xl mx-auto px-6 grid gap-10 md:grid-cols-2">
+      <!-- Testimonials -->
+      <div class="space-y-6" data-aos="fade-up">
+        <h3 class="text-2xl font-bold">What clients say</h3>
+
+        <div id="testi" class="relative overflow-hidden rounded-2xl">
+          <div id="testiTrack" class="flex transition-transform duration-700">
+            <!-- slide 1 -->
+            <div class="min-w-full p-6 bg-white rounded-2xl shadow">
+              <p class="text-gray-700 italic">"Redes made our product launch spectacular — the team handled everything flawlessly."</p>
+              <div class="mt-4 font-semibold">— S. Mohan, Product Head</div>
+              <div class="text-sm text-gray-500">June 2024</div>
+            </div>
+            <!-- slide 2 -->
+            <div class="min-w-full p-6 bg-white rounded-2xl shadow">
+              <p class="text-gray-700 italic">"Fantastic execution and creative direction. They elevated the brand presence."</p>
+              <div class="mt-4 font-semibold">— A. Fernandes, Marketing</div>
+              <div class="text-sm text-gray-500">Dec 2023</div>
+            </div>
+            <!-- slide 3 -->
+            <div class="min-w-full p-6 bg-white rounded-2xl shadow">
+              <p class="text-gray-700 italic">"Highly recommended — thoughtful planning and attentive team on the ground."</p>
+              <div class="mt-4 font-semibold">— R. Sen, CEO</div>
+              <div class="text-sm text-gray-500">Apr 2022</div>
+            </div>
+          </div>
+
+          <!-- controls -->
+          <div class="mt-4 flex items-center justify-center gap-3">
+            <button id="prevTesti" class="px-3 py-2 rounded bg-white/90">Prev</button>
+            <button id="nextTesti" class="px-3 py-2 rounded bg-white/90">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="80">
+        <div class="bg-[var(--accent)] text-white rounded-2xl p-6 text-center">
+          <div class="text-4xl font-bold counter" data-target="250">0</div>
+          <div class="mt-2">Events Organized</div>
+        </div>
+        <div class="bg-[var(--accent)] text-white rounded-2xl p-6 text-center">
+          <div class="text-4xl font-bold counter" data-target="180">0</div>
+          <div class="mt-2">Happy Clients</div>
+        </div>
+        <div class="bg-[var(--accent)] text-white rounded-2xl p-6 text-center">
+          <div class="text-4xl font-bold counter" data-target="50">0</div>
+          <div class="mt-2">Venues Partnered</div>
+        </div>
+        <div class="bg-[var(--accent)] text-white rounded-2xl p-6 text-center">
+          <div class="text-4xl font-bold counter" data-target="12">0</div>
+          <div class="mt-2">Years Experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FAQ (Accordion)
+  ============================ -->
+  <section class="max-w-6xl mx-auto px-6 py-20">
+    <div class="text-center mb-8" data-aos="fade-up">
+      <h2 class="text-2xl md:text-3xl font-bold">Frequently asked questions</h2>
+      <p class="text-gray-600 mt-2">Answers to common questions about our portfolio and production approach.</p>
+    </div>
+
+    <div class="space-y-4">
+      <div class="border rounded-2xl overflow-hidden" data-aos="fade-up">
+        <button class="faq-toggle w-full text-left px-6 py-4 flex items-center justify-between">
+          <span class="font-semibold">Can you handle events outside Bengaluru?</span>
+          <span class="text-gray-400">+</span>
+        </button>
+        <div class="faq-content hidden px-6 pb-6 text-gray-600">
+          Yes — we operate across India and have executed international events with trusted partners.
+        </div>
+      </div>
+
+      <div class="border rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="40">
+        <button class="faq-toggle w-full text-left px-6 py-4 flex items-center justify-between">
+          <span class="font-semibold">Do you provide full production (AV, lighting)?</span>
+          <span class="text-gray-400">+</span>
+        </button>
+        <div class="faq-content hidden px-6 pb-6 text-gray-600">
+          Absolutely — we have an in-house production team and preferred vendors for all technical requirements.
+        </div>
+      </div>
+
+      <div class="border rounded-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="80">
+        <button class="faq-toggle w-full text-left px-6 py-4 flex items-center justify-between">
+          <span class="font-semibold">Can you work with tight timelines?</span>
+          <span class="text-gray-400">+</span>
+        </button>
+        <div class="faq-content hidden px-6 pb-6 text-gray-600">
+          We handle urgent projects frequently — planning timelines are adaptively structured for rapid mobilization.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       CALL TO ACTION
+  ============================ -->
+  <section class="bg-[var(--accent)] text-white py-16">
+    <div class="max-w-6xl mx-auto px-6 text-center" data-aos="zoom-in">
+      <h3 class="text-3xl font-bold">Ready to create something unforgettable?</h3>
+      <p class="mt-3 text-gray-100">Tell us about your event and our team will reach out with a tailored proposal.</p>
+      <div class="mt-6">
+        <a href="contact.html" class="inline-block bg-white text-[var(--accent)] px-6 py-3 rounded-lg font-semibold shadow">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FOOTER
+  ================================================================== -->
+  <footer class="bg-gray-900 text-gray-300 py-16">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 px-6">
+      <div>
+        <h3 class="text-white font-bold text-xl mb-4">Redes</h3>
+        <p>Your trusted partner in event management. We bring your vision to life with creativity and professionalism.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-pink-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-pink-500">About</a></li>
+          <li><a href="services.html" class="hover:text-pink-500">Services</a></li>
+          <li><a href="portfolio.html" class="hover:text-pink-500">Portfolio</a></li>
+          <li><a href="blog.html" class="hover:text-pink-500">Blog</a></li>
+          <li><a href="contact.html" class="hover:text-pink-500">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Our Services</h4>
+        <ul class="space-y-2">
+          <li>Wedding Planning</li>
+          <li>Corporate Events</li>
+          <li>Concerts & Festivals</li>
+          <li>Birthday Parties</li>
+          <li>Exhibitions</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/facebook-new.png" alt="FB"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/instagram-new.png" alt="IG"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/twitter.png" alt="Twitter"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-10 text-gray-500">&copy; 2025 Redes Event Management. All rights reserved.</div>
+  </footer>
+
+  <!-- ===========================
+       SCRIPTS
+  ============================ -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init({ duration: 900, once: true });
+
+    // // set copyright year
+    // document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMobile = document.getElementById('closeMobile');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    });
+    closeMobile.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+
+    /* -----------------------
+       Portfolio filtering
+       ----------------------- */
+    (function(){
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const items = document.querySelectorAll('.portfolio-item');
+
+      // helper: show all
+      function showAll() {
+        items.forEach(i => { i.style.display = 'block'; i.style.opacity = '1'; });
+      }
+      // initialize
+      showAll();
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+          filterBtns.forEach(b => b.classList.remove('bg-[var(--accent)]','text-white'));
+          btn.classList.add('bg-[var(--accent)]','text-white');
+
+          if(filter === 'all') {
+            items.forEach(it => {
+              it.style.display = 'block';
+              it.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350 });
+            });
+            return;
+          }
+          items.forEach(it => {
+            const cat = it.getAttribute('data-category') || it.className;
+            if( (cat || '').toLowerCase().includes(filter.toLowerCase()) ) {
+              it.style.display = 'block';
+              it.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350 });
+            } else {
+              it.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
+
+    /* -----------------------
+       Lightbox: close on ESC or click outside image
+       ----------------------- */
+    (function(){
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape') {
+          history.pushState("", document.title, window.location.pathname + window.location.search);
+        }
+      });
+      // clicking outside: handled by anchor to #_
+      // no extra code required
+    })();
+
+    /* -----------------------
+       Counters animation
+       ----------------------- */
+    (function(){
+      const counters = document.querySelectorAll('.counter');
+      const speed = 140; // lower = faster
+      counters.forEach(counter => {
+        function run() {
+          const target = +counter.getAttribute('data-target') || 0;
+          const initial = +counter.innerText || 0;
+          const inc = Math.ceil(target / speed);
+          if(initial < target) {
+            counter.innerText = Math.min(target, initial + inc);
+            setTimeout(run, 20);
+          } else {
+            counter.innerText = target;
+          }
+        }
+        // start when visible
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting) { run(); obs.disconnect(); }
+          });
+        }, { threshold: 0.2 });
+        obs.observe(counter);
+      });
+    })();
+
+    /* -----------------------
+       Testimonials carousel simple
+       ----------------------- */
+    (function(){
+      const track = document.getElementById('testiTrack');
+      const prev = document.getElementById('prevTesti');
+      const next = document.getElementById('nextTesti');
+      let idx = 0;
+      const slides = track?.children?.length || 1;
+
+      function go(i) {
+        idx = (i + slides) % slides;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+      }
+      prev?.addEventListener('click', () => go(idx - 1));
+      next?.addEventListener('click', () => go(idx + 1));
+      // auto rotate
+      setInterval(() => { go(idx + 1); }, 5000);
+    })();
+
+    /* -----------------------
+       FAQ accordion toggles
+       ----------------------- */
+    (function(){
+      const toggles = document.querySelectorAll('.faq-toggle');
+      toggles.forEach(t => {
+        t.addEventListener('click', () => {
+          const content = t.nextElementSibling;
+          if(!content) return;
+          const isHidden = content.classList.contains('hidden');
+          document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+          document.querySelectorAll('.faq-toggle span:last-child').forEach(s => s.textContent = '+');
+          if(isHidden) {
+            content.classList.remove('hidden');
+            const plus = t.querySelector('span:last-child');
+            if(plus) plus.textContent = '−';
+          } else {
+            content.classList.add('hidden');
+            const plus = t.querySelector('span:last-child');
+            if(plus) plus.textContent = '+';
+          }
+        });
+      });
+    })();
+
+    /* -----------------------
+       Tiny accessibility helpers
+       ----------------------- */
+    (function(){
+      // close mobile menu on escape
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape') {
+          const mobile = document.getElementById('mobileMenu');
+          if(mobile && !mobile.classList.contains('hidden')) {
+            mobile.classList.add('hidden');
+          }
+          history.pushState("", document.title, window.location.pathname + window.location.search);
+        }
+      });
+    })();
+
+  </script>
+</body>
+</html>

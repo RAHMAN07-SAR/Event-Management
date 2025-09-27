@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Redes Event Management</title>
+  <meta name="description" content="Contact Redes Event Management - Let's create unforgettable events together.">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-thumb { background: #ec4899; border-radius: 10px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    .testimonial-slide { display: none; }
+    .testimonial-slide.active { display: block; }
+    .counter { font-weight: bold; }
+  </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="bg-white shadow-sm sticky top-0 z-40" role="banner" aria-label="Site header">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3" aria-label="Redes Event Management Home">
+          <svg width="40" height="40" viewBox="0 0 24 24" class="text-primary" aria-hidden>
+            <path fill="#d81f48" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
+          </svg>
+          <div>
+            <span class="font-bold text-lg leading-none">Redes</span>
+            <div class="text-xs -mt-0.5 text-gray-500">Event Management</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Main">
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="index.html">Home</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="about.html">About</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="service.html">Services</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="portfolio.html">Portfolio</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="blog.html">Blog</a>
+        <a class="text-sm uppercase tracking-widest hover:text-primary" href="content.html">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="content.html" class="hidden md:inline-block px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:brightness-95 focus-ring">Get Ticket</a>
+
+        <!-- Mobile hamburger -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg focus-ring" aria-label="Open menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="#2b2f33" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile slide-out -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/40 hidden z-50" aria-hidden="true">
+      <div class="bg-white w-80 h-full shadow-xl p-6 max-w-full" role="dialog" aria-modal="true" aria-label="Mobile menu">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <svg width="36" height="36" viewBox="0 0 24 24"><path fill="#d81f48" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+            <div>
+              <div class="font-bold">Redes</div>
+              <div class="text-xs text-gray-500">Event Management</div>
+            </div>
+          </div>
+          <button id="closeMobile" class="p-2 rounded focus-ring" aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+
+        <div class="mt-6">
+          <input type="search" placeholder="Search..." class="w-full border rounded-lg px-3 py-2 focus:ring" aria-label="Mobile search" />
+          <ul class="mt-6 space-y-3">
+            <li><a href="index.html" class="block py-2 px-3 rounded hover:bg-gray-50">Home</a></li>
+            <li><a href="about.html" class="block py-2 px-3 rounded hover:bg-gray-50">About</a></li>
+            <li><a href="service.html" class="block py-2 px-3 rounded hover:bg-gray-50">Services</a></li>
+            <li><a href="portfolio.html" class="block py-2 px-3 rounded hover:bg-gray-50">Portfolio</a></li>
+            <li><a href="blog.html" class="block py-2 px-3 rounded hover:bg-gray-50">Blog</a></li>
+            <li><a href="content.html" class="block py-2 px-3 rounded hover:bg-gray-50">Contact</a></li>
+          </ul>
+
+          <div class="mt-6 flex gap-3">
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a class="p-2 rounded-full bg-gray-100" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================================================================
+       HERO SECTION
+  ================================================================== -->
+  <section class="relative bg-cover bg-center h-96 mt-16 flex items-center justify-center text-white"
+           style="background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1600&q=80');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10 text-center" data-aos="fade-up">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+      <p class="text-lg">We’d love to hear from you. Let’s make your event unforgettable!</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       CONTACT FORM + INFO
+  ================================================================== -->
+  <section class="py-20 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 px-6">
+    
+    <!-- FORM -->
+    <div class="bg-white shadow-lg rounded-lg p-8" data-aos="fade-right">
+      <h2 class="text-3xl font-bold mb-6">Get In Touch</h2>
+      <form class="space-y-6">
+        <div>
+          <label class="block font-semibold mb-2">Your Name</label>
+          <input type="text" placeholder="John Doe"
+                 class="w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-pink-500">
+        </div>
+        <div>
+          <label class="block font-semibold mb-2">Email Address</label>
+          <input type="email" placeholder="example@email.com"
+                 class="w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-pink-500">
+        </div>
+        <div>
+          <label class="block font-semibold mb-2">Subject</label>
+          <input type="text" placeholder="Your Subject"
+                 class="w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-pink-500">
+        </div>
+        <div>
+          <label class="block font-semibold mb-2">Message</label>
+          <textarea rows="5" placeholder="Write your message..."
+                 class="w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+        </div>
+        <button type="submit" class="bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition">Send Message</button>
+      </form>
+    </div>
+
+    <!-- CONTACT INFO -->
+    <div class="space-y-8" data-aos="fade-left">
+      <div class="bg-white p-6 rounded-lg shadow flex items-start space-x-4">
+        <img src="https://img.icons8.com/color/48/000000/marker.png" alt="Location" class="w-12 h-12">
+        <div>
+          <h3 class="text-xl font-semibold">Our Office</h3>
+          <p>Bengaluru, Karnataka, India</p>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow flex items-start space-x-4">
+        <img src="https://img.icons8.com/color/48/000000/phone.png" alt="Phone" class="w-12 h-12">
+        <div>
+          <h3 class="text-xl font-semibold">Call Us</h3>
+          <p>+91 96766 59153</p>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow flex items-start space-x-4">
+        <img src="https://img.icons8.com/color/48/000000/new-post.png" alt="Email" class="w-12 h-12">
+        <div>
+          <h3 class="text-xl font-semibold">Email</h3>
+          <p>info@redescreation.in</p>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow flex items-start space-x-4">
+        <img src="https://img.icons8.com/color/48/000000/overtime.png" alt="Hours" class="w-12 h-12">
+        <div>
+          <h3 class="text-xl font-semibold">Working Hours</h3>
+          <p>Mon - Sat: 9AM - 6PM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       MAP SECTION
+  ================================================================== -->
+  <section class="h-96" data-aos="zoom-in">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.996835089463!2d77.59456201482102!3d12.971598990856279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c732f2d5%3A0x3a98c7b2e6fcd508!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1674678554319!5m2!1sen!2sin"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+  <!-- ================================================================
+       TEAM SECTION
+  ================================================================== -->
+  <section class="py-20 max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Meet Our Team</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="bg-white shadow-lg p-6 rounded-lg text-center" data-aos="flip-left">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-32 h-32 mx-auto rounded-full mb-4" alt="">
+        <h3 class="font-semibold text-xl">Anita Sharma</h3>
+        <p class="text-pink-600">Event Planner</p>
+      </div>
+      <div class="bg-white shadow-lg p-6 rounded-lg text-center" data-aos="flip-left">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-32 h-32 mx-auto rounded-full mb-4" alt="">
+        <h3 class="font-semibold text-xl">Rahul Verma</h3>
+        <p class="text-pink-600">Creative Head</p>
+      </div>
+      <div class="bg-white shadow-lg p-6 rounded-lg text-center" data-aos="flip-left">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-32 h-32 mx-auto rounded-full mb-4" alt="">
+        <h3 class="font-semibold text-xl">Pooja Mehta</h3>
+        <p class="text-pink-600">Client Manager</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       TESTIMONIALS CAROUSEL
+  ================================================================== -->
+  <section class="py-20 bg-gray-100">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-12">What Our Clients Say</h2>
+      <div id="testimonials">
+        <div class="testimonial-slide active" data-aos="fade-up">
+          <p class="text-xl italic mb-4">“Redes made our wedding unforgettable! The team was professional and creative.”</p>
+          <h4 class="font-semibold">— Priya & Aman</h4>
+        </div>
+        <div class="testimonial-slide" data-aos="fade-up">
+          <p class="text-xl italic mb-4">“Our corporate event was seamless. Highly recommend their services.”</p>
+          <h4 class="font-semibold">— Infosys HR</h4>
+        </div>
+        <div class="testimonial-slide" data-aos="fade-up">
+          <p class="text-xl italic mb-4">“The concert production was top-notch, flawless execution.”</p>
+          <h4 class="font-semibold">— Music Fest Team</h4>
+        </div>
+      </div>
+      <div class="mt-6 space-x-4">
+        <button onclick="showSlide(0)" class="px-4 py-2 bg-pink-600 text-white rounded">1</button>
+        <button onclick="showSlide(1)" class="px-4 py-2 bg-pink-600 text-white rounded">2</button>
+        <button onclick="showSlide(2)" class="px-4 py-2 bg-pink-600 text-white rounded">3</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       COUNTERS SECTION
+  ================================================================== -->
+  <section class="py-20 max-w-7xl mx-auto grid md:grid-cols-4 gap-10 text-center">
+    <div data-aos="fade-up">
+      <p class="text-5xl text-pink-600 counter" data-target="250">0</p>
+      <p class="mt-2">Events Organized</p>
+    </div>
+    <div data-aos="fade-up">
+      <p class="text-5xl text-pink-600 counter" data-target="180">0</p>
+      <p class="mt-2">Happy Clients</p>
+    </div>
+    <div data-aos="fade-up">
+      <p class="text-5xl text-pink-600 counter" data-target="75">0</p>
+      <p class="mt-2">Corporate Events</p>
+    </div>
+    <div data-aos="fade-up">
+      <p class="text-5xl text-pink-600 counter" data-target="50">0</p>
+      <p class="mt-2">Concerts</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FAQ SECTION
+  ================================================================== -->
+  <section class="py-20 max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+    <div class="space-y-4">
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">How can I book an event with Redes?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">You can contact us via the form, call, or email to discuss your requirements. We'll guide you step by step.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">Do you handle destination weddings?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Yes, we specialize in destination weddings across India and abroad.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">Can I schedule a consultation?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Absolutely! We offer free consultations to understand your event needs.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">What is your pricing structure?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Our packages are customized to fit your budget and requirements. We offer transparent pricing.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">How early should I book?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">We recommend booking at least 3–6 months in advance for weddings, and 1–2 months for corporate events.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">Do you provide vendor management?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Yes, we coordinate with all vendors to ensure seamless execution of your event.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">What if I need last-minute changes?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Our team is flexible and experienced in handling last-minute updates professionally.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">Do you work outside Bengaluru?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Yes, we organize events across India and internationally.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">Can you help with decor themes?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Of course! Our creative team customizes decor themes to match your vision.</div>
+      </div>
+      <div>
+        <button class="faq-toggle w-full text-left bg-gray-100 px-6 py-4 rounded-lg font-medium">Do you handle catering too?</button>
+        <div class="faq-content hidden px-6 py-4 text-gray-600">Yes, we manage catering with a variety of cuisines and menus tailored to your taste.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NEWSLETTER SECTION
+  ================================================================== -->
+  <section class="py-20 bg-pink-600 text-white text-center">
+    <h2 class="text-3xl font-bold mb-6">Stay Updated with Redes</h2>
+    <p class="mb-6">Subscribe to our newsletter for the latest updates and event inspirations.</p>
+    <form class="max-w-md mx-auto flex">
+      <input type="email" placeholder="Enter your email"
+             class="flex-grow px-4 py-3 rounded-l-lg text-gray-800 focus:outline-none">
+      <button class="bg-black px-6 py-3 rounded-r-lg hover:bg-gray-800 transition">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- ================================================================
+       FOOTER
+  ================================================================== -->
+  <footer class="bg-gray-900 text-gray-300 py-16">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10 px-6">
+      <div>
+        <h3 class="text-white font-bold text-xl mb-4">Redes</h3>
+        <p>Your trusted partner in event management. We bring your vision to life with creativity and professionalism.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-pink-500">Home</a></li>
+          <li><a href="about.html" class="hover:text-pink-500">About</a></li>
+          <li><a href="services.html" class="hover:text-pink-500">Services</a></li>
+          <li><a href="portfolio.html" class="hover:text-pink-500">Portfolio</a></li>
+          <li><a href="blog.html" class="hover:text-pink-500">Blog</a></li>
+          <li><a href="contact.html" class="hover:text-pink-500">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Our Services</h4>
+        <ul class="space-y-2">
+          <li>Wedding Planning</li>
+          <li>Corporate Events</li>
+          <li>Concerts & Festivals</li>
+          <li>Birthday Parties</li>
+          <li>Exhibitions</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+        <div class="flex space-x-4">
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/facebook-new.png" alt="FB"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/instagram-new.png" alt="IG"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/twitter.png" alt="Twitter"></a>
+          <a href="#"><img src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-10 text-gray-500">&copy; 2025 Redes Event Management. All rights reserved.</div>
+  </footer>
+
+  <!-- ================================================================
+       JAVASCRIPT
+  ================================================================== -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMobile = document.getElementById('closeMobile');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    });
+    closeMobile.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+
+    // Testimonials
+    const slides = document.querySelectorAll(".testimonial-slide");
+    function showSlide(n) {
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === n));
+    }
+
+    // Counters
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      const update = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const speed = 50;
+        const inc = Math.ceil(target / speed);
+        if(count < target){
+          counter.innerText = count + inc;
+          setTimeout(update, 30);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      update();
+    });
+
+    // FAQ
+    document.querySelectorAll(".faq-toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const content = btn.nextElementSibling;
+        content.classList.toggle("hidden");
+      });
+    });
+  </script>
+</body>
+</html>
